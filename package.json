@@ -1,0 +1,34 @@
+{
+  "name": "chark-front",
+  "version": "0.0.1",
+  "description": "Chark is the Future!",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ugnelis/chark-front.git"
+  },
+  "keywords": [
+    "chark"
+  ],
+  "author": "Chark",
+  "license": "Trade Secret",
+  "bugs": {
+    "url": "https://github.com/Ugnelis/chark-front/issues"
+  },
+  "homepage": "http://chark.io",
+  "dependencies": {
+    "bower": "^1.6.3"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-concat-css": "^0.3.1",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-sass": "^0.9.2",
+    "grunt-contrib-uglify": "^0.11.0",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
