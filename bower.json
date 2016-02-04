@@ -1,19 +1,19 @@
 {
-  "name": "chark-front",
+  "name": "angular-simple-app",
   "version": "0.0.1",
-  "description": "Chark is the Future!",
-  "main": "index.html",
   "moduleType": [
     "node"
   ],
   "keywords": [
-    "chark"
+    "angular",
+    "bootstrap",
+    "ui.router"
   ],
   "authors": [
-    "Chark"
+    "Ugnius Malukas"
   ],
-  "license": "Trade Secret",
-  "homepage": "http://chark.io",
+  "license": "MIT",
+  "homepage": "http://malukas.lt",
   "ignore": [
     "**/.*",
     "node_modules",

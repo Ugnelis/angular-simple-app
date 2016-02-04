@@ -1,24 +1,24 @@
 {
-  "name": "chark-front",
+  "name": "angular-simple-app",
   "version": "0.0.1",
-  "description": "Chark is the Future!",
-  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ugnelis/chark-front.git"
+    "url": "https://github.com/Ugnelis/angular-simple-app.git"
   },
   "keywords": [
-    "chark"
+    "angular",
+    "bootstrap",
+    "ui.router"
   ],
-  "author": "Chark",
-  "license": "Trade Secret",
+  "author": "Ugnius Malukas",
+  "homepage": "http://malukas.lt",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Ugnelis/chark-front/issues"
+    "url": "https://github.com/Ugnelis/angular-simple-app/issues"
   },
-  "homepage": "http://chark.io",
   "dependencies": {
     "bower": "^1.6.3"
   },
