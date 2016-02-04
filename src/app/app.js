@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app', ['ngAnimate', 'ui.router', 'angular-loading-bar'])
+angular.module('app', ['ngAnimate', 'ui.bootstrap', 'ui.router', 'angular-loading-bar'])
     .run(
         ['$rootScope', '$state', '$stateParams', 'cfpLoadingBar', function ($rootScope, $state, $stateParams, cfpLoadingBar) {
             $rootScope.$state = $state;
