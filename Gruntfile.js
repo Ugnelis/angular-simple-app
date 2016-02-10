@@ -53,6 +53,10 @@ module.exports = function (grunt) {
                     'dist/js/dep.js': [
                         'bower_components/angular/angular.js',
                         'bower_components/angular-animate/angular-animate.js',
+                        'bower_components/angular-sanitize/angular-sanitize.js',
+                        'bower_components/angular-resource/angular-resource.js',
+                        'bower_components/angular-jwt/dist/angular-jwt.js',
+                        'bower_components/a0-angular-storage/dist/angular-storage.js',
                         'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
                         'bower_components/angular-loading-bar/build/loading-bar.js',
                         'bower_components/angular-ui-router/release/angular-ui-router.js',

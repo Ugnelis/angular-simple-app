@@ -3,13 +3,13 @@
 angular.module('app')
     .config(['$httpProvider', '$stateProvider', function ($httpProvider, $stateProvider) {
         $stateProvider
-            .state('login', {
+            .state('profile', {
                 parent: 'site',
-                url: '/login',
+                url: '/profile',
                 views: {
                     'content@': {
-                        templateUrl: 'app/login/login.html',
-                        controller: 'LoginController as login'
+                        templateUrl: 'app/profile/profile.html',
+                        controller: 'ProfileController as profile'
                     }
                 }
             });
