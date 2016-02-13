@@ -16,7 +16,6 @@ angular.module('app')
                 }).success(function (data) {
                     store.set('jwt', data.token);
                     Auth.identity();
-                    $state.reload();
                     $state.go('home', null, {reload: true});
                 }).error(function (data) {
                     console.log("error");

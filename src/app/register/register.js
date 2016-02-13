@@ -6,8 +6,10 @@ angular.module('app')
             .state('register', {
                 parent: 'site',
                 url: '/register',
-                permissions: {
-                    only: ['anonymous']
+                data: {
+                    permissions: {
+                        only: ['anonymous']
+                    }
                 },
                 views: {
                     'content@': {

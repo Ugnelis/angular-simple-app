@@ -6,8 +6,10 @@ angular.module('app')
             .state('login', {
                 parent: 'site',
                 url: '/login',
-                permissions: {
-                    only: ['anonymous']
+                data: {
+                    permissions: {
+                        only: ['anonymous']
+                    }
                 },
                 views: {
                     'content@': {

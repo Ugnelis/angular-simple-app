@@ -18,6 +18,7 @@ angular.module('app', [
                 $rootScope.$state = $state;
                 $rootScope.$stateParams = $stateParams;
 
+                // On State Change
                 $rootScope.$on('$stateChangeStart',
                     function (event, toState, toParams, fromState, fromParams) {
                         cfpLoadingBar.start();
@@ -26,7 +27,11 @@ angular.module('app', [
                 $rootScope.$on('$stateChangeSuccess',
                     function (event, toState, toParams, fromState, fromParams) {
                         cfpLoadingBar.complete();
-                        console.log(Auth);
+                    });
+
+                $rootScope.$on('$stateChangePermissionDenied',
+                    function (event, toState, toParams, options) {
+                        $state.go('home', null, {reload: true});
                     });
 
                 // Permissions
@@ -47,7 +52,7 @@ angular.module('app', [
                 $httpProvider.defaults.useXDomain = true;
                 delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-                // JWT Token handling
+                // JWT Token Handling
                 jwtInterceptorProvider.authHeader = 'X-AUTH-TOKEN';
                 jwtInterceptorProvider.authPrefix = '';
                 jwtInterceptorProvider.tokenGetter = function (store) {
