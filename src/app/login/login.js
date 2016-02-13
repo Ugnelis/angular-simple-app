@@ -6,6 +6,9 @@ angular.module('app')
             .state('login', {
                 parent: 'site',
                 url: '/login',
+                permissions: {
+                    only: ['anonymous']
+                },
                 views: {
                     'content@': {
                         templateUrl: 'app/login/login.html',

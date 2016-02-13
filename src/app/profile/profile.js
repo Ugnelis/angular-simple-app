@@ -6,6 +6,11 @@ angular.module('app')
             .state('profile', {
                 parent: 'site',
                 url: '/profile',
+                data: {
+                    permissions: {
+                        only: ['user']
+                    }
+                },
                 views: {
                     'content@': {
                         templateUrl: 'app/profile/profile.html',

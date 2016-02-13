@@ -6,6 +6,9 @@ angular.module('app')
             .state('register', {
                 parent: 'site',
                 url: '/register',
+                permissions: {
+                    only: ['anonymous']
+                },
                 views: {
                     'content@': {
                         templateUrl: 'app/register/register.html',
@@ -13,4 +16,4 @@ angular.module('app')
                     }
                 }
             });
-    }])
+    }]);

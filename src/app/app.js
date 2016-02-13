@@ -8,11 +8,12 @@ angular.module('app', [
         'angular-loading-bar',
         'angular-storage',
         'ui.bootstrap',
+        'permission',
         'ui.router'
     ])
     .run(
-        ['$rootScope', '$state', '$stateParams', 'cfpLoadingBar',
-            function ($rootScope, $state, $stateParams, cfpLoadingBar) {
+        ['$rootScope', '$state', '$stateParams', 'cfpLoadingBar', 'PermissionStore', 'Auth', 'APP_ROLES',
+            function ($rootScope, $state, $stateParams, cfpLoadingBar, PermissionStore, Auth, APP_ROLES) {
 
                 $rootScope.$state = $state;
                 $rootScope.$stateParams = $stateParams;
@@ -25,7 +26,17 @@ angular.module('app', [
                 $rootScope.$on('$stateChangeSuccess',
                     function (event, toState, toParams, fromState, fromParams) {
                         cfpLoadingBar.complete();
+                        console.log(Auth);
                     });
+
+                // Permissions
+                PermissionStore.definePermission('anonymous', function (stateParams) {
+                    return !Auth.checkSession();
+                });
+
+                PermissionStore.definePermission('user', function (stateParams) {
+                    return Auth.hasAccess(APP_ROLES.USER);
+                });
             }]
     )
     .config(
