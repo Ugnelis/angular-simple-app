@@ -8,12 +8,11 @@ angular.module('app', [
         'angular-loading-bar',
         'angular-storage',
         'ui.bootstrap',
-        'permission',
         'ui.router'
     ])
     .run(
-        ['$rootScope', '$state', '$stateParams', 'cfpLoadingBar', 'PermissionStore', 'Auth', 'APP_ROLES',
-            function ($rootScope, $state, $stateParams, cfpLoadingBar, PermissionStore, Auth, APP_ROLES) {
+        ['$rootScope', '$state', '$stateParams', 'cfpLoadingBar', 'auth', 'principal',
+            function ($rootScope, $state, $stateParams, cfpLoadingBar, auth, principal) {
 
                 $rootScope.$state = $state;
                 $rootScope.$stateParams = $stateParams;
@@ -22,6 +21,11 @@ angular.module('app', [
                 $rootScope.$on('$stateChangeStart',
                     function (event, toState, toParams, fromState, fromParams) {
                         cfpLoadingBar.start();
+
+                        $rootScope.toState = toState;
+                        $rootScope.toStateParams = toParams;
+
+                        if (principal.isIdentityResolved()) auth.authorize();
                     });
 
                 $rootScope.$on('$stateChangeSuccess',
@@ -33,15 +37,6 @@ angular.module('app', [
                     function (event, toState, toParams, options) {
                         $state.go('home', null, {reload: true});
                     });
-
-                // Permissions
-                PermissionStore.definePermission('anonymous', function (stateParams) {
-                    return !Auth.checkSession();
-                });
-
-                PermissionStore.definePermission('user', function (stateParams) {
-                    return Auth.hasAccess(APP_ROLES.USER);
-                });
             }]
     )
     .config(
@@ -66,6 +61,14 @@ angular.module('app', [
 
                 $stateProvider.state('site', {
                     abstract: true,
+                    cache: false,
+                    resolve: {
+                        authorize: ['auth',
+                            function(auth) {
+                                return auth.authorize();
+                            }
+                        ]
+                    },
                     views: {
                         'navbar@': {
                             templateUrl: 'app/layouts/navbar/navbar.html',

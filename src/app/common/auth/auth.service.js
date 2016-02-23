@@ -1,49 +1,36 @@
 "use strict";
 
 angular.module('app')
-    .factory('Auth', ['$q', '$http', 'SERVER',
-        function ($q, $http, SERVER) {
+    .factory('auth', ['$rootScope', '$state', 'principal',
+        function ($rootScope, $state, principal) {
+            var auth = {
+                authorize: function () {
+                    return principal.identity()
+                        .then(function () {
+                            var isAuthenticated = principal.isAuthenticated();
 
-            var identity = undefined;
-            var authenticated = false;
+                            if ($rootScope.toState.data.roles && $rootScope.toState.data.roles.length > 0 && !principal.isInAnyRole($rootScope.toState.data.roles)) {
+                                if (isAuthenticated) $state.go('home');
+                                else {
+                                    // user is not authenticated. stow the state they wanted before you
+                                    // send them to the signin state, so you can return them when you're done
+                                    $rootScope.returnToState = $rootScope.toState;
+                                    $rootScope.returnToStateParams = $rootScope.toStateParams;
 
-            return {
-                checkSession: function () {
-                    return authenticated;
-                },
-                identity: function (force) {
-                    var deferred = $q.defer();
-
-                    if (force === true) identity = undefined;
-
-                    // check and see if we have retrieved the identity data from the server. if we have, reuse it by immediately resolving
-                    if (angular.isDefined(identity)) {
-                        deferred.resolve(identity);
-
-                        return deferred.promise;
-                    }
-
-                    $http.get(SERVER + '/profile', {ignoreErrors: true})
-                        .success(function (data) {
-                            identity = data;
-                            authenticated = true;
-                            deferred.resolve(identity);
-                        })
-                        .error(function () {
-                            identity = null;
-                            authenticated = false;
-                            deferred.resolve(identity);
+                                    // now, send them to the signin state so they can log in
+                                    $state.go('register');
+                                }
+                            }
                         });
                 },
-                getAccessLevel: function () {
-                    return identity.permissions;
-                },
-                hasAccess: function (role) {
-                    for (var index = 0; index < identity.permissions.length; ++index)
-                        if (identity.permissions[index].name == role)
-                            return true;
-                    return false;
+                login: function (credentials) {
+                    return principal.login(credentials)
+                        .then(function () {
+                            principal.identity(true);
+                            $state.go('home');
+                        });
                 }
             };
-        }]
-    );
+            return auth;
+        }
+    ]);

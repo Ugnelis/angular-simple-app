@@ -16,9 +16,10 @@
                 <li ui-sref-active="active"><a ui-sref="about">About</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li ui-sref-active="active" permission except="['anonymous']"><a ui-sref="profile">Profile</a></li>
-                <li ui-sref-active="active" permission only="['anonymous']"><a ui-sref="login">Login</a></li>
-                <li ui-sref-active="active" permission only="['anonymous']"><a ui-sref="register">Sign up</a></li>
+                <li ui-sref-active="active" ng-show="navbar.principal.isAuthenticated()" ><a ui-sref="profile">Profile</a></li>
+                <li ng-show="navbar.principal.isAuthenticated()"><a ng-click="navbar.signout()">Sign out</a></li>
+                <li ui-sref-active="active" ng-hide="navbar.principal.isAuthenticated()"><a ui-sref="login">Login</a></li>
+                <li ui-sref-active="active" ng-hide="navbar.principal.isAuthenticated()"><a ui-sref="register">Sign up</a></li>
             </ul>
         </div>
     </div>

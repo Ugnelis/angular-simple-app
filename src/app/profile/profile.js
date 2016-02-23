@@ -7,9 +7,7 @@ angular.module('app')
                 parent: 'site',
                 url: '/profile',
                 data: {
-                    permissions: {
-                        only: ['user']
-                    }
+                    roles: ['user']
                 },
                 views: {
                     'content@': {

@@ -6,6 +6,9 @@ angular.module('app')
             .state('about', {
                 parent: 'site',
                 url: '/about',
+                data: {
+                    roles: []
+                },
                 views: {
                     'content@': {
                         templateUrl: 'app/about/about.html',

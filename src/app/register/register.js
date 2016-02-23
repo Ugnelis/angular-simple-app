@@ -7,9 +7,7 @@ angular.module('app')
                 parent: 'site',
                 url: '/register',
                 data: {
-                    permissions: {
-                        only: ['anonymous']
-                    }
+                    roles: []
                 },
                 views: {
                     'content@': {
