@@ -29,6 +29,13 @@ angular.module('app')
                             principal.identity(true);
                             $state.go('home');
                         });
+                },
+                register: function (credentials) {
+                    return principal.register(credentials)
+                        .then(function () {
+                            principal.identity(true);
+                            $state.go('home');
+                        });
                 }
             };
             return auth;

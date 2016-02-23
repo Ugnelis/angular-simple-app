@@ -56,7 +56,6 @@ module.exports = function (grunt) {
                         'bower_components/angular-sanitize/angular-sanitize.js',
                         'bower_components/angular-resource/angular-resource.js',
                         'bower_components/angular-jwt/dist/angular-jwt.js',
-                        'bower_components/angular-permission/dist/angular-permission.js',
                         'bower_components/a0-angular-storage/dist/angular-storage.js',
                         'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
                         'bower_components/angular-loading-bar/build/loading-bar.js',

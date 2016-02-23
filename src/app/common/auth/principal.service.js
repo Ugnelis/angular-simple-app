@@ -89,6 +89,17 @@ angular.module('app')
                             store.set('jwt', data.token);
                         })
 
+                },
+                register: function (credentials) {
+                    return $http({
+                        method: 'POST',
+                        url: SERVER + '/register',
+                        data: JSON.stringify(credentials),
+                        ignoreErrors: true,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
                 }
             };
             return principal;
