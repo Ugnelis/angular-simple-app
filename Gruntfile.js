@@ -4,6 +4,18 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-karma');
+
+    var plugins = ['karma-jasmine']
+    var browsers = []
+
+    if (process.env.TRAVIS) {
+        plugins.push('karma-firefox-launcher')
+        browsers.push('Firefox')
+    } else {
+        plugins.push('karma-chrome-launcher')
+        browsers.push('Chrome')
+    }
 
     // Project configuration.
     grunt.initConfig({
@@ -22,6 +34,24 @@ module.exports = function (grunt) {
                         'src/app/app.js'
                     ]
                 }
+            }
+        },
+        karma: {
+            options: {
+                browsers: browsers,
+                frameworks: ['jasmine'],
+                plugins: plugins
+            },
+            config: {
+                configFile: 'test/karma.conf.js',
+                singleRun: true
+            },
+            dev: {
+                reporters: 'dots',
+                background: true
+            },
+            auto: {
+                autoWatch: true
             }
         },
         concat: {
@@ -127,4 +157,5 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['watch']);
     grunt.registerTask('init', ['concat:depJs', 'concat:appJs', 'concat:depCss', 'concat:appCss', 'copy', /*'sass',*'copy:copyPage'*/, 'copy:images', 'concat', 'copy:fonts']);
+    grunt.registerTask('test', ['karma:config']);
 };
