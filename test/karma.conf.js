@@ -18,7 +18,11 @@ module.exports = function (config) {
             'bower_components/angular-loading-bar/build/loading-bar.js',
             'bower_components/angular-ui-router/release/angular-ui-router.js',
             'bower_components/jquery/dist/jquery.js',
-            'src/js/**/*.js',
+            'bower_components/angular-mocks/angular-mocks.js',
+            'bower_components/angular-scenario/angular-scenario.js',
+            'src/app/app.js',
+            'src/app/*.js',
+            'src/app/**/*.js',
             'test/**/*.js'
         ]
     });
