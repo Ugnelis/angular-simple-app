@@ -3,12 +3,6 @@
 describe('principal', function () {
     beforeEach(module('app'));
 
-    var $httpBackend;
-
-    beforeEach(inject(function ($injector) {
-        $httpBackend = $injector.get('$httpBackend');
-    }));
-
     it('can get an instance of principal factory', inject(function (principal) {
         expect(principal).toBeDefined();
     }));
