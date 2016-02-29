@@ -1,8 +1,8 @@
 "use strict";
 
 angular.module('app')
-    .factory('auth', ['$rootScope', '$state', 'principal',
-        function ($rootScope, $state, principal) {
+    .factory('auth', ['$rootScope', '$state', 'principal', 'alert',
+        function ($rootScope, $state, principal, alert) {
             var auth = {
                 authorize: function () {
                     return principal.identity()
@@ -32,6 +32,9 @@ angular.module('app')
                 },
                 register: function (credentials) {
                     return principal.register(credentials)
+                        .error(function (response) {
+                            alert.add('danger', response.message);
+                        })
                         .then(function () {
                             principal.identity(true);
                             $state.go('home');
