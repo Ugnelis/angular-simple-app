@@ -48,25 +48,23 @@ angular.module('app')
                         return deferred.promise;
                     }
 
-                    if (store.get('jwt'))
-                        $http.get(SERVER + '/profile', {ignoreErrors: true})
-                            .success(function (data) {
-                                _identity = data;
-                                _authenticated = true;
-                                // roles parser
-                                _identity.roles = Object.keys(_identity.permissions).map(function (key) {
-                                    return _identity.permissions[key].name
-                                });
-                                deferred.resolve(_identity);
-                                principal.authenticate(_identity);
-                            })
-                            .error(function () {
-                                _identity = null;
-                                _authenticated = false;
-                                deferred.resolve(_identity);
+                    $http.get(SERVER + '/profile', {ignoreErrors: true})
+                        .success(function (data) {
+                            _identity = data;
+                            _authenticated = true;
+                            // roles parser
+                            _identity.roles = Object.keys(_identity.permissions).map(function (key) {
+                                return _identity.permissions[key].name
                             });
+                            deferred.resolve(_identity);
+                            principal.authenticate(_identity);
+                        })
+                        .error(function () {
+                            _identity = null;
+                            _authenticated = false;
+                            deferred.resolve(_identity);
+                        });
 
-                    //var self = this;
                     $timeout(function () {
                         _identity = angular.fromJson(store.get('identity'));
                         principal.authenticate(_identity);
@@ -88,7 +86,6 @@ angular.module('app')
                         .success(function (data) {
                             store.set('jwt', data.token);
                         })
-
                 },
                 register: function (credentials) {
                     return $http({
